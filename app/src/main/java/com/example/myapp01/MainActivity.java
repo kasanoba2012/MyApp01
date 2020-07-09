@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> arrayList;
     ArrayAdapter<String> arrayAdapter;
 
-
+    private Spinner carChoose;
     ArrayList<String> carList;
     ArrayAdapter<String> carArrayAdapter;
 
@@ -46,8 +46,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Log.i("선택확인", arrayList.get(i));
-                if (arrayList.get(i) == "기아") {
-                    Log.i("선택확인2", "기아가선택됐다");
+                switch (arrayList.get(i)) {
+                    case "기아" :
+                        Log.i("선택확인2", "기아가선택됐다");
+                        carList = new ArrayList<>();
+                        carList.add("레이");
+                        carList.add("K3");
+                        carList.add("K5");
+                        carList.add("K7");
+                        carArrayAdapter = new ArrayAdapter<>(getApplicationContext(),
+                                android.R.layout.simple_spinner_dropdown_item,
+                                carList);
+                        carChoose = findViewById(R.id.carChoose);
+                        carChoose.setAdapter(carArrayAdapter);
+                        break;
+
+                    default:
+                        carList.clear();
+                        break;
                 }
                 Toast.makeText(getApplicationContext(),arrayList.get(i)+"가 선택되었습니다.",
                         Toast.LENGTH_SHORT).show();
